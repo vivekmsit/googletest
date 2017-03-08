@@ -4,7 +4,7 @@ Example applications using google test framework
 Prerequisites: 
 gtest and gmock should be installed on the system. 
 
-Procedure: 
+Procedure to install google test framework : 
 
 1. git clone https://github.com/google/googletest.git
 2. mkdir build_local
