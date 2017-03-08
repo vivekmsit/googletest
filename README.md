@@ -5,6 +5,7 @@ Prerequisites:
 gtest and gmock should be installed on the system. 
 
 Procedure: 
+
 1. git clone https://github.com/google/googletest.git
 2. mkdir build_local
 3. cd build_local
