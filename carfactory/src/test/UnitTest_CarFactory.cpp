@@ -5,6 +5,7 @@
 #include <TyreFactory_Mock.hpp>
 #include <ConcreteCar.hpp>
 #include <Configuration_Stub.hpp>
+#include <Car_Mock.hpp>
 
 #include "gtest/gtest.h"
 #include "gmock/gmock.h"
@@ -58,6 +59,8 @@ TEST_F(CarAssembleFactoryTest, assembleCar) {
 
 TEST_F(CarAssembleFactoryTest, assembleCarUsingConfiguration) {
 	CarAssembleFactory carAssembleFactory(mainFactory);
+	ICar *car = new ConcreteCar();
+	//Car_Mock *car = new Car_Mock();
 
 	EXPECT_CALL(*windowFactory, createWindow(_, _)).Times(2);
         EXPECT_CALL(*doorFactory, createDoor(_, _)).Times(2);
@@ -70,7 +73,11 @@ TEST_F(CarAssembleFactoryTest, assembleCarUsingConfiguration) {
 	EXPECT_CALL(*(ConfigurationMockDelegatee::getInstance()), getTyreBrandName()).Times(4);
 	EXPECT_CALL(*(ConfigurationMockDelegatee::getInstance()), getTyreType()).Times(4);
 
-	ICar *car = new ConcreteCar();
+	/*EXPECT_CALL(*car, addWindow(_)).Times(2);
+	EXPECT_CALL(*car, addDoor(_)).Times(2);
+	EXPECT_CALL(*car, addTyre(_)).Times(4);*/
+
 	carAssembleFactory.assembleCarUsingConfiguration(car, "file.config");
+	delete car;
 }
 
