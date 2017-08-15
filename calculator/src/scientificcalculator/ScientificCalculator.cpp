@@ -28,3 +28,12 @@ double ScientificCalculator::tan(double degrees) {
 	return m_Trig->tanMethod(degrees);
 }
 
+void ScientificCalculator::testFunction1(double value) {
+	double result = m_Log->log10Method(value);
+	if (result < 5 ) {
+		m_Trig->sinMethod(30);
+	} else {
+		m_Trig->cosMethod(90);
+	}
+}
+

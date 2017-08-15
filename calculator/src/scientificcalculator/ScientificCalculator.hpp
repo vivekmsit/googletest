@@ -14,6 +14,8 @@ public:
 	double cos(double angle);
 	double tan(double angle);
 
+	void testFunction1(double value);
+
 private:
 	Logarithm *m_Log;
 	Trigonometry *m_Trig;

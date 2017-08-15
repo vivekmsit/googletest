@@ -2,7 +2,10 @@
 
 class Trigonometry {
 public:
-	double sinMethod(double degrees);
-	double cosMethod(double degrees);
-	double tanMethod(double degrees);
+	Trigonometry(){}
+	virtual ~Trigonometry(){}
+
+	virtual double sinMethod(double degrees);
+	virtual double cosMethod(double degrees);
+	virtual double tanMethod(double degrees);
 };

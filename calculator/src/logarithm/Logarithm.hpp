@@ -2,7 +2,8 @@
 
 class Logarithm {
 public:
-
-	double logMethod(double value);
-	double log10Method(double value);
+	Logarithm(){}
+	virtual ~Logarithm(){}
+	virtual double logMethod(double value);
+	virtual double log10Method(double value);
 };

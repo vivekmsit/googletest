@@ -11,6 +11,7 @@
 class Car_Mock: public ICar {
 public:
 	Car_Mock(){}
+	virtual ~Car_Mock(){}
 
 	MOCK_METHOD0(drive, void());
 	MOCK_METHOD1(addWindow, void(IWindow *));
