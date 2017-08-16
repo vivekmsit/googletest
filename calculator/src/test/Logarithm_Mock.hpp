@@ -13,4 +13,7 @@ public:
 	MOCK_METHOD1(logMethod, double(double));
 	MOCK_METHOD1(log10Method, double(double));
 
+	MOCK_METHOD2(log10MethodRefWithoutReturn, void(double, double &));
+	MOCK_METHOD2(log10MethodPointWithoutReturn, void(double, double *));
+
 };
