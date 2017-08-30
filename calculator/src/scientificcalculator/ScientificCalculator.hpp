@@ -15,6 +15,9 @@ public:
 	double tan(double angle);
 
 	void testFunction1(double value);
+	void testFunction2(double value);
+	void testFunction3(double value);
+	void testFunction4(double value);
 
 private:
 	Logarithm *m_Log;
