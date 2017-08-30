@@ -5,7 +5,6 @@ using namespace std;
 
 ScientificCalculator::ScientificCalculator(Logarithm *log, Trigonometry *trig):
 	m_Log(log), m_Trig(trig) {
-
 }
 
 double ScientificCalculator::log(double value) {

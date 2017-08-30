@@ -5,6 +5,8 @@
 
 #include "Logarithm.hpp"
 
+using namespace testing;
+
 class Logarithm_Mock: public Logarithm {
 public:
 	Logarithm_Mock():Logarithm(){}
@@ -16,4 +18,9 @@ public:
 	MOCK_METHOD2(log10MethodRefWithoutReturn, void(double, double &));
 	MOCK_METHOD2(log10MethodPointWithoutReturn, void(double, double *));
 
+	// change default behaviour
+	void setDefaultBehaviour() {
+		ON_CALL(*this, logMethod(_)).WillByDefault(Return(5));
+		ON_CALL(*this, log10Method(_)).WillByDefault(Return(5));
+	}
 };

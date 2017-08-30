@@ -12,7 +12,7 @@ include_directories("mocks")
 
 
 add_executable(calculator_test
-	src/UnitTest_Calculator.cpp
+	UnitTest_Calculator.cpp
 	../src/calculator/Calculator.cpp 
 )
 
@@ -20,7 +20,7 @@ target_link_libraries(calculator_test gtest_main gmock_main gtest gmock pthread)
 
 
 add_executable(scientificCalculator_test
-	src/UnitTest_ScientificCalculator.cpp
+	UnitTest_ScientificCalculator.cpp
 	../src/calculator/Calculator.cpp
 	../src/scientificcalculator/ScientificCalculator.cpp 
 	../src/logarithm/Logarithm.cpp
