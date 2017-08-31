@@ -6,6 +6,7 @@
 #include "ScientificCalculator.hpp"
 #include "Logarithm_Mock.hpp"
 #include "Trigonometry_Mock.hpp"
+#include "types.hpp"
 
 using namespace testing;
 using namespace std;
@@ -124,33 +125,47 @@ TEST_F(ScientificCalculatorTest, testFunction1_ELSE_CASE_Check_Order) {
 TEST_F(ScientificCalculatorTest, testFunction2_IF_CASE) {
 	Logarithm_Mock lMock;
 	Trigonometry_Mock tMock;
-	double expectedResult = 3;
+	testStruct myStruct;
+	myStruct.a = 3;
 	ScientificCalculator calc(&lMock, &tMock);
-	EXPECT_CALL(lMock, log10MethodRefWithoutReturn(_, _)).Times(1).WillOnce(SetArgReferee<1>( expectedResult ));
+	EXPECT_CALL(lMock, logTestFunction1(_)).Times(1).WillOnce(SetArgReferee<0>( myStruct ));
 	EXPECT_CALL(tMock, sinMethod(_)).Times(1);
-	calc.testFunction2(1000);
+	calc.testFunction2();
 }
 
 // Example test for SetArgPointee()
 TEST_F(ScientificCalculatorTest, testFunction3_IF_CASE) {
 	Logarithm_Mock lMock;
 	Trigonometry_Mock tMock;
-	double expectedResult = 3;
+	testStruct myStruct;
+	myStruct.a = 3;
 	ScientificCalculator calc(&lMock, &tMock);
-	EXPECT_CALL(lMock, log10MethodPointWithoutReturn(_, _)).Times(1).WillOnce(SetArgPointee<1>( expectedResult ));
+	EXPECT_CALL(lMock, logTestFunction2(_)).Times(1).WillOnce(SetArgPointee<0>( myStruct ));
 	EXPECT_CALL(tMock, sinMethod(_)).Times(1);
-	calc.testFunction3(1000);
+	calc.testFunction3();
+}
+
+// Example test for SaveArgPointee()
+TEST_F(ScientificCalculatorTest, testFunction4) {
+	Logarithm_Mock lMock;
+	Trigonometry_Mock tMock;
+	testStruct myStruct;
+	ScientificCalculator calc(&lMock, &tMock);
+	EXPECT_CALL(lMock, logTestFunction3(_)).Times(1).WillOnce(SaveArgPointee<0>( &myStruct ));
+	calc.testFunction4();
+	EXPECT_EQ(myStruct.a, 6);
+	EXPECT_EQ(myStruct.flag, true);
 }
 
 // Example test for RetiresOnSaturation()
-TEST_F(ScientificCalculatorTest, testFunction4_IF_CASE) {
+TEST_F(ScientificCalculatorTest, testFunction5_IF_CASE) {
 	Logarithm_Mock lMock;
 	Trigonometry_Mock tMock;
 	ScientificCalculator calc(&lMock, &tMock);
 	EXPECT_CALL(lMock, log10Method(_)).Times(1).WillOnce(Return(1));
 	EXPECT_CALL(lMock, log10Method(_)).Times(1).WillOnce(Return(2)).RetiresOnSaturation();
 	EXPECT_CALL(tMock, sinMethod(_)).Times(1);
-	calc.testFunction4(1000);
+	calc.testFunction5(1000);
 }
 
 

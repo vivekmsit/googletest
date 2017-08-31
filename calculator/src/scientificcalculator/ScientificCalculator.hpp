@@ -3,6 +3,7 @@
 #include "Calculator.hpp"
 #include "Logarithm.hpp"
 #include "Trigonometry.hpp"
+#include "types.hpp"
 
 class ScientificCalculator: public Calculator {
 public:
@@ -15,9 +16,10 @@ public:
 	double tan(double angle);
 
 	void testFunction1(double value);
-	void testFunction2(double value);
-	void testFunction3(double value);
-	void testFunction4(double value);
+	void testFunction2();
+	void testFunction3();
+	void testFunction4();
+	void testFunction5(double value);
 
 private:
 	Logarithm *m_Log;

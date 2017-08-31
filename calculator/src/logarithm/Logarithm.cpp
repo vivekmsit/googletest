@@ -16,3 +16,15 @@ void Logarithm::log10MethodRefWithoutReturn(double value, double &result) {
 void Logarithm::log10MethodPointWithoutReturn(double value, double *result) {
 	*result = log10(value);
 }
+
+void Logarithm::logTestFunction1(testStruct &value) {
+	(void)value;
+}
+
+void Logarithm::logTestFunction2(testStruct *value) {
+	(void)value;
+}
+
+void Logarithm::logTestFunction3(const testStruct *value) {
+	(void)value;
+}

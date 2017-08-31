@@ -18,6 +18,10 @@ public:
 	MOCK_METHOD2(log10MethodRefWithoutReturn, void(double, double &));
 	MOCK_METHOD2(log10MethodPointWithoutReturn, void(double, double *));
 
+	MOCK_METHOD1(logTestFunction1, void (testStruct &));
+	MOCK_METHOD1(logTestFunction2, void (testStruct *));
+	MOCK_METHOD1(logTestFunction3, void (const testStruct *));
+
 	// change default behaviour
 	void setDefaultBehaviour() {
 		ON_CALL(*this, logMethod(_)).WillByDefault(Return(5));

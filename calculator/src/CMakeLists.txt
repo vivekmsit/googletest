@@ -9,6 +9,7 @@ include_directories("scientificcalculator")
 include_directories("logarithm")
 include_directories("trigonometry")
 include_directories("test")
+include_directories(".")
 
 add_executable(main 
 	main.cpp 

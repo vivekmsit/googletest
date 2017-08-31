@@ -8,6 +8,7 @@ include_directories("../src/calculator")
 include_directories("../src/scientificcalculator")
 include_directories("../src/logarithm")
 include_directories("../src/trigonometry")
+include_directories("../src")
 include_directories("mocks")
 
 
