@@ -15,7 +15,6 @@ class ScientificCalculatorTest: public ::testing::Test {
 public:
 
 ScientificCalculatorTest() {
-
 }
 
 void SetUp() {
@@ -25,7 +24,6 @@ void TearDown() {
 }
 
 ~ScientificCalculatorTest() {
-
 }
 
 };
@@ -100,7 +98,7 @@ TEST_F(ScientificCalculatorTest, testFunction1_IF_CASE) {
 	calc.testFunction1(1000);
 }
 
-// Example test for Return()
+// Example test for Return() without setting default behaviour
 TEST_F(ScientificCalculatorTest, testFunction1_ELSE_CASE) {
 	Logarithm_Mock lMock;
 	Trigonometry_Mock tMock;
@@ -111,7 +109,7 @@ TEST_F(ScientificCalculatorTest, testFunction1_ELSE_CASE) {
 }
 
 // Checking order using Sequence (Reverse the order to check for failure)
-TEST_F(ScientificCalculatorTest, testFunction1_ELSE_CASE_Check_Order) {
+TEST_F(ScientificCalculatorTest, testFunction1_ELSE_CASE_Using_InSequence) {
 	Logarithm_Mock lMock;
 	Trigonometry_Mock tMock;
 	Sequence s1;
@@ -122,7 +120,7 @@ TEST_F(ScientificCalculatorTest, testFunction1_ELSE_CASE_Check_Order) {
 }
 
 // Example test for SetArgReferee
-TEST_F(ScientificCalculatorTest, testFunction2_IF_CASE) {
+TEST_F(ScientificCalculatorTest, testFunction2_IF_CASE_SetArgReferee) {
 	Logarithm_Mock lMock;
 	Trigonometry_Mock tMock;
 	testStruct myStruct;
@@ -134,7 +132,7 @@ TEST_F(ScientificCalculatorTest, testFunction2_IF_CASE) {
 }
 
 // Example test for SetArgPointee()
-TEST_F(ScientificCalculatorTest, testFunction3_IF_CASE) {
+TEST_F(ScientificCalculatorTest, testFunction3_IF_CASE_SetArgPointee) {
 	Logarithm_Mock lMock;
 	Trigonometry_Mock tMock;
 	testStruct myStruct;
@@ -146,7 +144,7 @@ TEST_F(ScientificCalculatorTest, testFunction3_IF_CASE) {
 }
 
 // Example test for SaveArgPointee()
-TEST_F(ScientificCalculatorTest, testFunction4) {
+TEST_F(ScientificCalculatorTest, testFunction4_SaveArgPointee) {
 	Logarithm_Mock lMock;
 	Trigonometry_Mock tMock;
 	testStruct myStruct;
@@ -158,7 +156,7 @@ TEST_F(ScientificCalculatorTest, testFunction4) {
 }
 
 // Example test for RetiresOnSaturation()
-TEST_F(ScientificCalculatorTest, testFunction5_IF_CASE) {
+TEST_F(ScientificCalculatorTest, testFunction5_IF_CASE_RetiresOnSaturation) {
 	Logarithm_Mock lMock;
 	Trigonometry_Mock tMock;
 	ScientificCalculator calc(&lMock, &tMock);
@@ -168,5 +166,49 @@ TEST_F(ScientificCalculatorTest, testFunction5_IF_CASE) {
 	calc.testFunction5(1000);
 }
 
+// Example test for testing how expect calls are checked (bottom to top order during mock method call)
+TEST_F(ScientificCalculatorTest, testFunction5_order_of_expect_calls) {
+	Logarithm_Mock lMock;
+	Trigonometry_Mock tMock;
+	ScientificCalculator calc(&lMock, &tMock);
+
+	//std::cout<<"test1"<<std::endl;
+	EXPECT_CALL(lMock, log10Method(_)).Times(1).WillOnce(Return(1));
+	EXPECT_CALL(lMock, log10Method(_)).Times(1).WillOnce(Return(2)).RetiresOnSaturation();
+	EXPECT_CALL(tMock, sinMethod(_)).Times(1);
+	//std::cout<<"test2"<<std::endl;
+	calc.testFunction5(1000);
+
+	//std::cout<<"test3"<<std::endl;
+	EXPECT_CALL(lMock, log10Method(_)).Times(1).WillOnce(Return(1));
+	EXPECT_CALL(lMock, log10Method(_)).Times(1).WillOnce(Return(2)).RetiresOnSaturation();
+	EXPECT_CALL(tMock, sinMethod(_)).Times(1);
+	//std::cout<<"test4"<<std::endl;
+	calc.testFunction5(1000);
+
+	//std::cout<<"test5"<<std::endl;
+}
+
+// Example test for NiceMock<> (No warning for Uninteresting mock function calls)
+TEST_F(ScientificCalculatorTest, testFunction_NiceMock) {
+	Logarithm_Mock lMock;
+	NiceMock<Trigonometry_Mock> tMock;
+	ScientificCalculator calc(&lMock, &tMock);
+	EXPECT_CALL(lMock, log10Method(_)).Times(1).WillOnce(Return(1));
+	EXPECT_CALL(lMock, log10Method(_)).Times(1).WillOnce(Return(2)).RetiresOnSaturation();
+	//EXPECT_CALL(tMock, sinMethod(_)).Times(1);
+	calc.testFunction5(1000);
+}
+
+// Example test for StrictMock<> (Test Failure for Uninteresting mock function calls)
+TEST_F(ScientificCalculatorTest, testFunction_StrictMock) {
+	Logarithm_Mock lMock;
+	StrictMock<Trigonometry_Mock> tMock;
+	ScientificCalculator calc(&lMock, &tMock);
+	EXPECT_CALL(lMock, log10Method(_)).Times(1).WillOnce(Return(1));
+	EXPECT_CALL(lMock, log10Method(_)).Times(1).WillOnce(Return(2)).RetiresOnSaturation();
+	EXPECT_CALL(tMock, sinMethod(_)).Times(1); // Comment this line to get failure for uninteresting calls as Mock is of type StrictMock.
+	calc.testFunction5(1000);
+}
 
 
