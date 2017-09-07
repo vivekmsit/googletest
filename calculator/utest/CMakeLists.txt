@@ -4,6 +4,6 @@ project(CalculatorUnitTest C CXX)
 
 add_subdirectory(calculator)
 add_subdirectory(scientificCalculator)
-add_subdirectory(noFixtureClass)
+add_subdirectory(assertions)
 
 
