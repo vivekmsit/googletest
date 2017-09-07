@@ -11,7 +11,6 @@ class CalculatorTest: public ::testing::Test {
 public:
 
 CalculatorTest() {
-
 }
 
 void SetUp() {
@@ -21,7 +20,6 @@ void TearDown() {
 }
 
 ~CalculatorTest() {
-
 }
 
 };
@@ -55,7 +53,6 @@ TEST_F(CalculatorTest, divideByZero) {
 	Calculator calc;
 	EXPECT_THROW( { calc.divide(5,0);}, std::logic_error);
 }
-
 
 // Parameterized Tests for sum function (Separate class is required for each set of parameterized tests)
 
