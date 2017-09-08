@@ -67,12 +67,11 @@ void ScientificCalculator::testFunction4() {
 	m_Log->logTestFunction3(&st);
 }
 
-
-
 // Example function for testing RetiresOnSaturation()
 void ScientificCalculator::testFunction5(double value) {
 	double result1 = m_Log->log10Method(value);
 	double result2 = m_Log->log10Method(2*value);
+	//std::cout<<"result1 is: " << result1 << ", result2 is: " << result2 << std::endl;
 	if (result1 != result2) {
 		m_Trig->sinMethod(30);
 	} else {

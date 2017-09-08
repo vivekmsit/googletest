@@ -182,6 +182,10 @@ TEST_F(ScientificCalculatorTest, testFunction5_order_of_expect_calls) {
 	//std::cout<<"test3"<<std::endl;
 	EXPECT_CALL(lMock, log10Method(_)).Times(1).WillOnce(Return(1));
 	EXPECT_CALL(lMock, log10Method(_)).Times(1).WillOnce(Return(2)).RetiresOnSaturation();
+
+	//EXPECT_CALL(lMock, log10Method(1000)).Times(1).WillOnce(Return(1));
+	//EXPECT_CALL(lMock, log10Method(2000)).Times(1).WillOnce(Return(2)); // no need of RetiresOnSaturation() here..
+
 	EXPECT_CALL(tMock, sinMethod(_)).Times(1);
 	//std::cout<<"test4"<<std::endl;
 	calc.testFunction5(1000);
